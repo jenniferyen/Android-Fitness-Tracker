@@ -9,6 +9,8 @@ import java.io.Serializable
 data class Item(
     @PrimaryKey(autoGenerate = true) var itemId: Long?,
     @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "date") var date: String,
+
     @ColumnInfo(name = "Mon") var Mon: String,
     @ColumnInfo(name = "Tues") var Tues: String,
     @ColumnInfo(name = "Wed") var Wed: String,

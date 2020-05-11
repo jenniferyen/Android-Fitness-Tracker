@@ -37,6 +37,8 @@ class ItemDialog : DialogFragment() {
     }
 
     private lateinit var etName: EditText
+    private lateinit var etDate: EditText
+
     private lateinit var etMon: EditText
     private lateinit var etTues: EditText
     private lateinit var etWed: EditText
@@ -56,6 +58,8 @@ class ItemDialog : DialogFragment() {
         )
 
         etName = dialogView.etName
+        etDate = dialogView.etDate
+
         etMon = dialogView.etMon
         etTues = dialogView.etTues
         etWed = dialogView.etWed
@@ -71,6 +75,8 @@ class ItemDialog : DialogFragment() {
         if (editMode) {
             val item: Item = (arguments?.getSerializable(KEY_ITEM) as Item)
             etName.setText(item.name)
+            etDate.setText(item.date)
+
             etMon.setText(item.Mon)
             etTues.setText(item.Tues)
             etWed.setText(item.Wed)
@@ -109,6 +115,8 @@ class ItemDialog : DialogFragment() {
             Item(
                 null,
                 etName.text.toString(),
+                etDate.text.toString(),
+
                 etMon.text.toString(),
                 etTues.text.toString(),
                 etWed.text.toString(),
@@ -123,6 +131,8 @@ class ItemDialog : DialogFragment() {
     private fun handleItemEdit() {
         val itemToEdit: Item = arguments?.getSerializable(KEY_ITEM) as Item
         itemToEdit.name = etName.text.toString()
+        itemToEdit.date = etDate.text.toString()
+
         itemToEdit.Mon = etMon.text.toString()
         itemToEdit.Tues = etTues.text.toString()
         itemToEdit.Wed = etWed.text.toString()

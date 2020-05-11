@@ -14,6 +14,8 @@ import com.example.fitness_tracker.R
 import com.example.fitness_tracker.data.AppDatabase
 import com.example.fitness_tracker.data.Item
 import kotlinx.android.synthetic.main.item_layout.view.*
+import java.text.SimpleDateFormat
+
 
 class PlansListAdapter(
     private val context: Context,
@@ -53,6 +55,11 @@ class PlansListAdapter(
 
     private fun bindProperties(holder: ViewHolder, item: Item) {
         holder.tvName.text = item.name
+        holder.tvDate.text = item.date
+
+        val df = SimpleDateFormat("yyyy-MM-dd")
+        val startDate = df.parse(item.date)
+        d("start_date", startDate.toString())
 
         if (runs[0].distance * 1.609f > item.Mon.toInt()) {
             d("setting_green", "Mon")
@@ -105,6 +112,8 @@ class PlansListAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName = itemView.tvName
+        val tvDate = itemView.tvDate
+
         val tvMon = itemView.tvMon
         val tvTues = itemView.tvTues
         val tvWed = itemView.tvWed

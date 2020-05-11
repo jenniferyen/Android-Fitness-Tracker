@@ -14,17 +14,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivImage"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_margin="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:src="@mipmap/ic_launcher"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
@@ -33,6 +22,16 @@
             android:text="Name"
             android:textSize="24sp"
             card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Date"
+            android:textSize="24sp"
+            card_view:layout_constraintStart_toEndOf="@+id/tvName"
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -92,6 +91,7 @@
             android:layout_margin="16dp"
             android:text="Sat"
             android:textSize="20sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/tvFri"
             card_view:layout_constraintTop_toBottomOf="@+id/tvTues" />
 
@@ -100,8 +100,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="24dp"
             android:text="Sun"
             android:textSize="20sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/tvSat"
             card_view:layout_constraintTop_toBottomOf="@+id/tvWed" />
 
@@ -113,7 +117,6 @@
             android:text="Delete"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/ivImage"
             card_view:layout_constraintVertical_bias="1.0" />
 
         <Button
@@ -122,8 +125,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="Edit"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toStartOf="@+id/btnDelete" />
+            card_view:layout_constraintBottom_toTopOf="@+id/btnDelete"
+            card_view:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
