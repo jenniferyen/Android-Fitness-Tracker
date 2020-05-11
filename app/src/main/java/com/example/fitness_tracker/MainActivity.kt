@@ -16,6 +16,10 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        var runs = mutableListOf<Run>()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val orig = sharedPref.getString("run_data", null)
         val type = object : TypeToken<MutableList<Run>>() {}.type
         val temp: MutableList<Run>? = Gson().fromJson(orig, type)
-        var runs = mutableListOf<Run>()
+
         if (temp != null) {
             runs = temp
         }
@@ -57,24 +61,23 @@ class MainActivity : AppCompatActivity() {
                     }
                     // last week
                     2 -> {
-
+                        tvStats.text = "No runs yet to display"
                     }
                     // last month
                     3 -> {
-
+                        tvStats.text = "No runs yet to display"
                     }
                     // last year
                     4 -> {
-
+                        tvStats.text = "No runs yet to display"
                     }
                     // all time
                     5 -> {
-
+                        tvStats.text = "No runs yet to display"
                     }
                 }
             }
         }
-
 
         //    { "token_type":"Bearer",
         //        "access_token":"c45f7f713c5122a772a9cd30933fa1086506f5b6",
@@ -83,7 +86,6 @@ class MainActivity : AppCompatActivity() {
         //        "refresh_token":"1c5eae10a247b2a4085858d40cd3b1cb45e583d0" }%
 
         btnOAuth.setOnClickListener {
-            d("btOAuth", "btnOAuth was clicked")
             val client_id = "47634"
             val intentUri = Uri.parse("https://www.strava.com/oauth/mobile/authorize")
                 .buildUpon()
@@ -94,9 +96,15 @@ class MainActivity : AppCompatActivity() {
                 .appendQueryParameter("scope", "read,activity:read_all")
                 .build()
 
-            val intent = Intent(Intent.ACTION_VIEW, intentUri)
-            startActivity(intent)
+            startActivity(Intent(Intent.ACTION_VIEW, intentUri))
             d("btnOAuth", "new intent started")
+        }
+
+        btnViewPlans.setOnClickListener {
+            val intent = Intent(this@MainActivity, PlansActivity::class.java)
+            startActivity(intent)
+            finish()
+            d("btnViewPlans", "new intent started")
         }
     }
 

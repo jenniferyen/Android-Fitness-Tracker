@@ -34,5 +34,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".StravaVerified" />
+        <activity android:name=".PlansActivity" />
     </application>
 </manifest>
