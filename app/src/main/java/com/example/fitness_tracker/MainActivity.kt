@@ -1,23 +1,86 @@
 package com.example.fitness_tracker
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log.d
+import android.view.View
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fitness_tracker.data.Run
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-//    { "token_type":"Bearer",
-//        "access_token":"c45f7f713c5122a772a9cd30933fa1086506f5b6",
-//        "expires_at":1589093322,
-//        "expires_in":21415,
-//        "refresh_token":"1c5eae10a247b2a4085858d40cd3b1cb45e583d0" }%
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val sharedPref = getSharedPreferences("shared_pref", Context.MODE_PRIVATE)
+
+        val orig = sharedPref.getString("run_data", null)
+        val type = object : TypeToken<MutableList<Run>>() {}.type
+        val temp: MutableList<Run>? = Gson().fromJson(orig, type)
+        var runs = mutableListOf<Run>()
+        if (temp != null) {
+            runs = temp
+        }
+
+        spinnerTime.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    // select
+                    0 -> {
+                        tvStats.text = "No runs yet to display"
+                    }
+                    // most recent run
+                    1 -> {
+                        if (runs.size == 0) {
+                            tvStats.text = "No runs yet to display"
+                        } else {
+                            val dist = "%.2f".format(runs[0].distance * 1.609f)
+                            val timeH = "%.2f".format(runs[0].minutes / 60f)
+                            tvStats.text = "Total distance = $dist km\nTotal time = $timeH hours"
+                        }
+                    }
+                    // last week
+                    2 -> {
+
+                    }
+                    // last month
+                    3 -> {
+
+                    }
+                    // last year
+                    4 -> {
+
+                    }
+                    // all time
+                    5 -> {
+
+                    }
+                }
+            }
+        }
+
+
+        //    { "token_type":"Bearer",
+        //        "access_token":"c45f7f713c5122a772a9cd30933fa1086506f5b6",
+        //        "expires_at":1589093322,
+        //        "expires_in":21415,
+        //        "refresh_token":"1c5eae10a247b2a4085858d40cd3b1cb45e583d0" }%
 
         btnOAuth.setOnClickListener {
             d("btOAuth", "btnOAuth was clicked")
@@ -35,5 +98,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             d("btnOAuth", "new intent started")
         }
+    }
+
+    fun getDaysAgo(daysAgo: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
+
+        return calendar.time
     }
 }

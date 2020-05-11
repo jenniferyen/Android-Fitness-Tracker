@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Fitness-Tracker</string>
+    <string name="app_name">FitnessON</string>
+
+    <string-array name="spinnerItems">
+        <item>---Please select---</item>
+        <item>Most recent run</item>
+        <item>Last week</item>
+        <item>Last month</item>
+        <item>Last year</item>
+        <item>All time</item>
+    </string-array>
 </resources>

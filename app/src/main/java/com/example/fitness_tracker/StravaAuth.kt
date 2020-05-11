@@ -15,7 +15,7 @@ class StravaAuth : AppCompatActivity() {
         setContentView(R.layout.strava_auth)
 
         val data = intent.toUri(0)
-        d("full_url", "url = $data")
+        d("full_url", data)
 
         var i = 27
         while (!(data[i] == '=' && data.slice(i - 4 until i) == "code")) {
@@ -27,12 +27,13 @@ class StravaAuth : AppCompatActivity() {
             j++
         }
         val code = data.slice(i until j)
-        d("access_code", "code = $code")
+        d("access_code", code)
 
         val client_id = "47634"
         val client_secret = "56efa9ec707ddbba56ef0f11cd024f9314e2813e"
 
         val http_client = OkHttpClient()
+
         val formBody: RequestBody = FormBody.Builder()
             .add("client_id", client_id)
             .add("client_secret", client_secret)
@@ -49,10 +50,10 @@ class StravaAuth : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
-                d("api_response", body)
+                d("api_response_auth", body)
                 val gson = GsonBuilder().create()
 
-                val output = gson.fromJson(body, AccessResponse::class.java)
+                val output = gson.fromJson(body, AuthResponse::class.java)
                 if (output == null) {
                     d("error", "output was null, returning home")
                 }
@@ -61,7 +62,6 @@ class StravaAuth : AppCompatActivity() {
                 val stravaFile = File(internalStorage, "strava_auth.txt")
                 stravaFile.createNewFile()
                 stravaFile.writeText(output.access_token)
-                d("access token", "is ${output.access_token}")
 
                 runOnUiThread {
                     startActivity(Intent(applicationContext, StravaVerified::class.java))
@@ -78,3 +78,11 @@ class StravaAuth : AppCompatActivity() {
         })
     }
 }
+
+class AuthResponse(
+    val token_type: String,
+    val expires_at: String,
+    val expires_in: String,
+    val refresh_token: String,
+    val access_token: String
+)
