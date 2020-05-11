@@ -3,8 +3,8 @@ package com.example.fitness_tracker.data
 import java.util.*
 
 class Run(
-    dist: Float,
-    total_mins: Float,
+    distance: Float,
+    minutes: Float,
     month: Int,
     day: Int,
     year: Int,
@@ -22,15 +22,15 @@ class Run(
     var id = ""
 
     init {
-        distance = dist
-        minutes = total_mins
+        this.distance = distance
+        this.minutes = minutes
         this.month = month
         this.day = day
         this.year = year
-        val pace = minutes / dist
+        val pace = this.minutes / distance
         pace_mins = pace.toInt()
         pace_secs = ((pace - pace_mins) * 60).toInt()
-        speed = 60f * dist / minutes
+        speed = 60f * distance / this.minutes
         this.title = title
     }
 
@@ -54,10 +54,12 @@ class Run(
     }
 
     override fun compareTo(other: Run): Int {
-        return other.getDate().compareTo(this.getDate())
+        return other.getCalDate().compareTo(this.getCalDate())
     }
 
-    fun getDate(): Date {
-        return Date(year - 1900, month - 1, day)
+    fun getCalDate(): Date {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month-1, day)
+        return calendar.time
     }
 }

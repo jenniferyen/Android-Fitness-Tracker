@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -44,6 +45,11 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
+                val curr_date = Calendar.getInstance().timeInMillis
+                val weekMillis = 604800000L
+                val monthMillis = 2419200000L
+                val yearMillis = 31449600000L
+
                 when (position) {
                     // select
                     0 -> {
@@ -61,19 +67,117 @@ class MainActivity : AppCompatActivity() {
                     }
                     // last week
                     2 -> {
-                        tvStats.text = "No runs yet to display"
+                        var dist = 0f
+                        var timeM = 0f
+
+                        for (run in runs) {
+                            val temp = Calendar.getInstance()
+                            temp.set(run.year, run.month - 1, run.day)
+                            val run_date = temp.timeInMillis
+                            val diff = curr_date - run_date
+
+                            d("curr_date", Calendar.getInstance().time.toString())
+                            d("run_date", temp.time.toString())
+                            d("run_diff", diff.toString())
+
+                            if (diff in 0..weekMillis) {
+                                d("adding_run", "distance: ${run.distance}, time: ${run.minutes}")
+                                dist += run.distance
+                                timeM += run.minutes
+                            } else {
+                                break
+                            }
+                        }
+
+                        val timeH = timeM / 60f
+                        val timeHStr = "%.2f".format(timeH)
+                        if (dist == 0f) {
+                            tvStats.text = "No runs here to display"
+                        } else {
+                            val distStr = "%.2f".format(dist * 1.609f)
+                            tvStats.text =
+                                "Total distance = $distStr km\nTotal time = $timeHStr hours"
+                        }
                     }
                     // last month
                     3 -> {
-                        tvStats.text = "No runs yet to display"
+                        var dist = 0f
+                        var timeM = 0f
+
+                        for (run in runs) {
+                            val temp = Calendar.getInstance()
+                            temp.set(run.year, run.month - 1, run.day)
+                            val run_date = temp.timeInMillis
+                            val diff = curr_date - run_date
+
+                            if (diff in 0..monthMillis) {
+                                d("adding_run", "distance: ${run.distance}, time: ${run.minutes}")
+                                dist += run.distance
+                                timeM += run.minutes
+                            } else {
+                                break
+                            }
+                        }
+
+                        val timeH = timeM / 60f
+                        val timeHStr = "%.2f".format(timeH)
+                        if (dist == 0f) {
+                            tvStats.text = "No runs here to display"
+                        } else {
+                            val distStr = "%.2f".format(dist * 1.609f)
+                            tvStats.text =
+                                "Total distance = $distStr km\nTotal time = $timeHStr hours"
+                        }
                     }
                     // last year
                     4 -> {
-                        tvStats.text = "No runs yet to display"
+                        var dist = 0f
+                        var timeM = 0f
+
+                        for (run in runs) {
+                            val temp = Calendar.getInstance()
+                            temp.set(run.year, run.month - 1, run.day)
+                            val run_date = temp.timeInMillis
+                            val diff = curr_date - run_date
+
+                            if (diff in 0..yearMillis) {
+                                d("adding_run", "distance: ${run.distance}, time: ${run.minutes}")
+                                dist += run.distance
+                                timeM += run.minutes
+                            } else {
+                                break
+                            }
+                        }
+
+                        val timeH = timeM / 60f
+                        val timeHStr = "%.2f".format(timeH)
+                        if (dist == 0f) {
+                            tvStats.text = "No runs here to display"
+                        } else {
+                            val distStr = "%.2f".format(dist * 1.609f)
+                            tvStats.text =
+                                "Total distance = $distStr km\nTotal time = $timeHStr hours"
+                        }
                     }
                     // all time
                     5 -> {
-                        tvStats.text = "No runs yet to display"
+                        var dist = 0f
+                        var timeM = 0f
+
+                        for (run in runs) {
+                            dist += run.distance
+                            timeM += run.minutes
+                        }
+
+                        val timeH = timeM / 60f
+                        val timeHStr = "%.2f".format(timeH)
+                        if (dist == 0f) {
+                            tvStats.text = "No runs here to display"
+                        } else {
+                            val distStr = "%.2f".format(dist * 1.609f)
+                            tvStats.text =
+                                "Total distance = $distStr km\nTotal time = $timeHStr hours"
+                        }
                     }
                 }
             }
@@ -106,12 +210,5 @@ class MainActivity : AppCompatActivity() {
             finish()
             d("btnViewPlans", "new intent started")
         }
-    }
-
-    fun getDaysAgo(daysAgo: Int): Date {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
-
-        return calendar.time
     }
 }
