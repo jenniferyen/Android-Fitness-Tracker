@@ -15,6 +15,7 @@ import com.example.fitness_tracker.data.AppDatabase
 import com.example.fitness_tracker.data.Item
 import kotlinx.android.synthetic.main.item_layout.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PlansListAdapter(
@@ -58,24 +59,89 @@ class PlansListAdapter(
         holder.tvDate.text = item.date
 
         val df = SimpleDateFormat("yyyy-MM-dd")
-        val startDate = df.parse(item.date)
-        d("start_date", startDate.toString())
+        val dateInput = df.parse(item.date)
 
-        if (runs[0].distance * 1.609f > item.Mon.toInt()) {
-            d("setting_green", "Mon")
-            holder.tvMon.setTextColor(Color.parseColor("#008000"))
-        } else {
-            d("setting_red", "Mon")
-            holder.tvMon.setTextColor(Color.parseColor("#FF0000"))
+        val cal = Calendar.getInstance()
+        cal.time = dateInput
+        val startDate = cal.timeInMillis
+        // val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
+
+        for (run in runs) {
+            // get runs within the week
+            val temp = Calendar.getInstance()
+            temp.set(run.year, run.month - 1, run.day)
+            val runDate = temp.timeInMillis
+            val diff = runDate - startDate
+
+            if (diff in 0..604800000L) {
+                d("valid_run", "distance: ${run.distance}, time: ${run.minutes}")
+
+                // get day of week of run
+                when (temp.get(Calendar.DAY_OF_WEEK)) {
+                    // Sunday
+                    1 -> {
+                        if (runs[0].distance * 1.609f > item.Sun.toInt()) {
+                            holder.tvSun.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            holder.tvSun.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                    // Monday
+                    2 -> {
+                        if (runs[0].distance * 1.609f > item.Mon.toInt()) {
+                            holder.tvMon.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            holder.tvMon.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                    // Tuesday
+                    3 -> {
+                        if (runs[0].distance * 1.609f > item.Tues.toInt()) {
+                            holder.tvTues.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            holder.tvTues.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                    // Wednesday
+                    4 -> {
+                        if (runs[0].distance * 1.609f > item.Wed.toInt()) {
+                            holder.tvWed.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            holder.tvWed.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                    // Thursday
+                    5 -> {
+                        if (runs[0].distance * 1.609f > item.Thurs.toInt()) {
+                            holder.tvThurs.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            holder.tvThurs.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                    // Friday
+                    6 -> {
+                        if (runs[0].distance * 1.609f > item.Fri.toInt()) {
+                            holder.tvFri.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            holder.tvFri.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                    // Saturday
+                    7 -> {
+                        d("sat_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        if (runs[0].distance * 1.609f > item.Sat.toInt()) {
+                            d("setting_green", "Sat")
+                            holder.tvSat.setTextColor(Color.parseColor("#008000"))
+                        } else {
+                            d("setting_red", "Sat")
+                            holder.tvSat.setTextColor(Color.parseColor("#FF0000"))
+                        }
+                    }
+                }
+            } else {
+                break
+            }
         }
-
-//        holder.tvMon.text = item.Mon
-//        holder.tvTues.text = item.Tues
-//        holder.tvWed.text = item.Wed
-//        holder.tvThurs.text = item.Thurs
-//        holder.tvFri.text = item.Fri
-//        holder.tvSat.text = item.Sat
-//        holder.tvSun.text = item.Sun
     }
 
     private fun deleteItem(index: Int) {

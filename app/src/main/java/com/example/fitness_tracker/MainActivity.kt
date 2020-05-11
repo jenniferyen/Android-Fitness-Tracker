@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val curr_date = Calendar.getInstance().timeInMillis
+                val currDate = Calendar.getInstance().timeInMillis
                 val weekMillis = 604800000L
                 val monthMillis = 2419200000L
                 val yearMillis = 31449600000L
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                             val temp = Calendar.getInstance()
                             temp.set(run.year, run.month - 1, run.day)
                             val run_date = temp.timeInMillis
-                            val diff = curr_date - run_date
+                            val diff = currDate - run_date
 
                             d("curr_date", Calendar.getInstance().time.toString())
                             d("run_date", temp.time.toString())
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                             val temp = Calendar.getInstance()
                             temp.set(run.year, run.month - 1, run.day)
                             val run_date = temp.timeInMillis
-                            val diff = curr_date - run_date
+                            val diff = currDate - run_date
 
                             if (diff in 0..monthMillis) {
                                 d("adding_run", "distance: ${run.distance}, time: ${run.minutes}")
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                             val temp = Calendar.getInstance()
                             temp.set(run.year, run.month - 1, run.day)
                             val run_date = temp.timeInMillis
-                            val diff = curr_date - run_date
+                            val diff = currDate - run_date
 
                             if (diff in 0..yearMillis) {
                                 d("adding_run", "distance: ${run.distance}, time: ${run.minutes}")
@@ -190,10 +190,10 @@ class MainActivity : AppCompatActivity() {
         //        "refresh_token":"1c5eae10a247b2a4085858d40cd3b1cb45e583d0" }%
 
         btnOAuth.setOnClickListener {
-            val client_id = "47634"
+            val clientId = "47634"
             val intentUri = Uri.parse("https://www.strava.com/oauth/mobile/authorize")
                 .buildUpon()
-                .appendQueryParameter("client_id", client_id)
+                .appendQueryParameter("client_id", clientId)
                 .appendQueryParameter("redirect_uri", "https://fitness-tracker.com")
                 .appendQueryParameter("response_type", "code")
                 .appendQueryParameter("approval_prompt", "auto")

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="Date"
-            android:textSize="24sp"
+            android:textSize="20sp"
             card_view:layout_constraintStart_toEndOf="@+id/tvName"
             card_view:layout_constraintTop_toTopOf="parent" />
 
