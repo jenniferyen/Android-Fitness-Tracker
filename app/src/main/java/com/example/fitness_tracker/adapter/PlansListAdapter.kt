@@ -64,7 +64,39 @@ class PlansListAdapter(
         val cal = Calendar.getInstance()
         cal.time = dateInput
         val startDate = cal.timeInMillis
-        // val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
+        val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) // starting on Mon, Tues, etc.
+        d("start_date", dayOfWeek.toString())
+
+        for (i in 2 until dayOfWeek) {
+            when (i) {
+                2 -> {
+                    holder.tvMon.visibility = View.INVISIBLE
+                }
+                3 -> {
+                    holder.tvTues.visibility = View.INVISIBLE
+                }
+                4 -> {
+                    holder.tvWed.visibility = View.INVISIBLE
+                }
+                5 -> {
+                    holder.tvThurs.visibility = View.INVISIBLE
+                }
+                6 -> {
+                    holder.tvFri.visibility = View.INVISIBLE
+                }
+                7 -> {
+                    holder.tvSat.visibility = View.INVISIBLE
+                }
+            }
+        }
+
+        var distSun = 0f
+        var distMon = 0f
+        var distTues = 0f
+        var distWed = 0f
+        var distThurs = 0f
+        var distFri = 0f
+        var distSat = 0f
 
         for (run in runs) {
             // get runs within the week
@@ -80,7 +112,11 @@ class PlansListAdapter(
                 when (temp.get(Calendar.DAY_OF_WEEK)) {
                     // Sunday
                     1 -> {
-                        if (runs[0].distance * 1.609f > item.Sun.toInt()) {
+                        distSun += run.distance
+
+                        d("sun_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        d("sun_total", distSun.toString())
+                        if (item.Sun.isNotBlank() && distSun * 1.609f > item.Sun.toDouble()) {
                             holder.tvSun.setTextColor(Color.parseColor("#008000"))
                         } else {
                             holder.tvSun.setTextColor(Color.parseColor("#FF0000"))
@@ -88,7 +124,11 @@ class PlansListAdapter(
                     }
                     // Monday
                     2 -> {
-                        if (runs[0].distance * 1.609f > item.Mon.toInt()) {
+                        distMon += run.distance
+
+                        d("mon_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        d("mon_total", distMon.toString())
+                        if (item.Mon.isNotBlank() && distMon * 1.609f > item.Mon.toDouble()) {
                             holder.tvMon.setTextColor(Color.parseColor("#008000"))
                         } else {
                             holder.tvMon.setTextColor(Color.parseColor("#FF0000"))
@@ -96,7 +136,11 @@ class PlansListAdapter(
                     }
                     // Tuesday
                     3 -> {
-                        if (runs[0].distance * 1.609f > item.Tues.toInt()) {
+                        distTues += run.distance
+
+                        d("tues_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        d("tues_total", distTues.toString())
+                        if (item.Tues.isNotBlank() && distTues * 1.609f > item.Tues.toDouble()) {
                             holder.tvTues.setTextColor(Color.parseColor("#008000"))
                         } else {
                             holder.tvTues.setTextColor(Color.parseColor("#FF0000"))
@@ -104,7 +148,11 @@ class PlansListAdapter(
                     }
                     // Wednesday
                     4 -> {
-                        if (runs[0].distance * 1.609f > item.Wed.toInt()) {
+                        distWed += run.distance
+
+                        d("wed_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        d("wed_total", distWed.toString())
+                        if (item.Wed.isNotBlank() && distWed * 1.609f > item.Wed.toDouble()) {
                             holder.tvWed.setTextColor(Color.parseColor("#008000"))
                         } else {
                             holder.tvWed.setTextColor(Color.parseColor("#FF0000"))
@@ -112,7 +160,11 @@ class PlansListAdapter(
                     }
                     // Thursday
                     5 -> {
-                        if (runs[0].distance * 1.609f > item.Thurs.toInt()) {
+                        distThurs += run.distance
+
+                        d("thurs_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        d("thurs_total", distThurs.toString())
+                        if (item.Thurs.isNotBlank() && distThurs * 1.609f > item.Thurs.toDouble()) {
                             holder.tvThurs.setTextColor(Color.parseColor("#008000"))
                         } else {
                             holder.tvThurs.setTextColor(Color.parseColor("#FF0000"))
@@ -120,7 +172,11 @@ class PlansListAdapter(
                     }
                     // Friday
                     6 -> {
-                        if (runs[0].distance * 1.609f > item.Fri.toInt()) {
+                        distFri += run.distance
+
+                        d("fri_run", "distance: ${run.distance}, time: ${run.minutes}")
+                        d("fri_total", distFri.toString())
+                        if (item.Fri.isNotBlank() && distFri * 1.609f > item.Fri.toDouble()) {
                             holder.tvFri.setTextColor(Color.parseColor("#008000"))
                         } else {
                             holder.tvFri.setTextColor(Color.parseColor("#FF0000"))
@@ -128,12 +184,13 @@ class PlansListAdapter(
                     }
                     // Saturday
                     7 -> {
+                        distSat += run.distance
+
                         d("sat_run", "distance: ${run.distance}, time: ${run.minutes}")
-                        if (runs[0].distance * 1.609f > item.Sat.toInt()) {
-                            d("setting_green", "Sat")
+                        d("sat_total", distSat.toString())
+                        if (item.Sat.isNotBlank() && distSat * 1.609f > item.Sat.toDouble()) {
                             holder.tvSat.setTextColor(Color.parseColor("#008000"))
                         } else {
-                            d("setting_red", "Sat")
                             holder.tvSat.setTextColor(Color.parseColor("#FF0000"))
                         }
                     }

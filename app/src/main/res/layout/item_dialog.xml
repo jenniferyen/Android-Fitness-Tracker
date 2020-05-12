@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Monday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etName" />
@@ -46,7 +46,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="12dp"
         android:hint="Tuesday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMon" />
 
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Wednesday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etTues" />
 
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Thursday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etWed" />
 
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Friday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etThurs" />
 
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Saturday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etFri" />
 
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Sunday"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSat" />
 
