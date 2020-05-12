@@ -114,8 +114,10 @@ class PlansListAdapter(
                         d("mon_run", "distance: ${run.distance}, time: ${run.minutes}")
                         d("mon_total", distMon.toString())
                         if (item.Mon.isNotBlank() && distMon * 1.609f > item.Mon.toDouble()) {
+                            d("setting_green", "Mon")
                             holder.tvMon.setTextColor(Color.parseColor("#008000"))
                         } else {
+                            d("setting_red", "Mon")
                             holder.tvMon.setTextColor(Color.parseColor("#FF0000"))
                         }
                     }

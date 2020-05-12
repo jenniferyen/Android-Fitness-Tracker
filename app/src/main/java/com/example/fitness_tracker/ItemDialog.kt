@@ -97,7 +97,7 @@ class ItemDialog : DialogFragment() {
 
         val positiveButton: Button = (dialog as AlertDialog).getButton(Dialog.BUTTON_POSITIVE)
         positiveButton.setOnClickListener {
-            if (etName.text.isNotEmpty()) {
+            if (etName.text.isNotEmpty() and etDate.text.isNotEmpty()) {
                 if (editMode) {
                     handleItemEdit()
                 } else {
@@ -106,6 +106,7 @@ class ItemDialog : DialogFragment() {
                 dialog!!.dismiss()
             } else {
                 etName.error = "This field cannot be empty"
+                etDate.error = "This field cannot be empty"
             }
         }
     }
