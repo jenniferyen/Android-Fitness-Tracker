@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.item_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class PlansListAdapter(
     private val context: Context,
     plansListItems: List<Item>
@@ -67,29 +66,15 @@ class PlansListAdapter(
         val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) // starting on Mon, Tues, etc.
         d("start_date", dayOfWeek.toString())
 
-        for (i in 2 until dayOfWeek) {
-            when (i) {
-                2 -> {
-                    holder.tvMon.visibility = View.INVISIBLE
-                }
-                3 -> {
-                    holder.tvTues.visibility = View.INVISIBLE
-                }
-                4 -> {
-                    holder.tvWed.visibility = View.INVISIBLE
-                }
-                5 -> {
-                    holder.tvThurs.visibility = View.INVISIBLE
-                }
-                6 -> {
-                    holder.tvFri.visibility = View.INVISIBLE
-                }
-                7 -> {
-                    holder.tvSat.visibility = View.INVISIBLE
-                }
-            }
-        }
+        setVisibility(dayOfWeek, holder)
+        setDistanceColors(startDate, item, holder)
+    }
 
+    private fun setDistanceColors(
+        startDate: Long,
+        item: Item,
+        holder: ViewHolder
+    ) {
         var distSun = 0f
         var distMon = 0f
         var distTues = 0f
@@ -99,12 +84,12 @@ class PlansListAdapter(
         var distSat = 0f
 
         for (run in runs) {
-            // get runs within the week
             val temp = Calendar.getInstance()
             temp.set(run.year, run.month - 1, run.day)
             val runDate = temp.timeInMillis
             val diff = runDate - startDate
 
+            // get runs within the week
             if (diff in 0..604800000L) {
                 d("valid_run", "distance: ${run.distance}, time: ${run.minutes}")
 
@@ -197,6 +182,45 @@ class PlansListAdapter(
                 }
             } else {
                 break
+            }
+        }
+    }
+
+    private fun setVisibility(
+        dayOfWeek: Int,
+        holder: ViewHolder
+    ) {
+        // Sunday
+        if (dayOfWeek == 1) {
+            holder.tvMon.visibility = View.INVISIBLE
+            holder.tvTues.visibility = View.INVISIBLE
+            holder.tvWed.visibility = View.INVISIBLE
+            holder.tvThurs.visibility = View.INVISIBLE
+            holder.tvFri.visibility = View.INVISIBLE
+            holder.tvSat.visibility = View.INVISIBLE
+        }
+
+        // all other days
+        for (i in 2 until dayOfWeek) {
+            when (i) {
+                2 -> {
+                    holder.tvMon.visibility = View.INVISIBLE
+                }
+                3 -> {
+                    holder.tvTues.visibility = View.INVISIBLE
+                }
+                4 -> {
+                    holder.tvWed.visibility = View.INVISIBLE
+                }
+                5 -> {
+                    holder.tvThurs.visibility = View.INVISIBLE
+                }
+                6 -> {
+                    holder.tvFri.visibility = View.INVISIBLE
+                }
+                7 -> {
+                    holder.tvSat.visibility = View.INVISIBLE
+                }
             }
         }
     }

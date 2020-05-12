@@ -28,7 +28,6 @@ class PlansActivity : AppCompatActivity(), ItemDialog.ItemHandler {
         fabAddItem.setOnClickListener {
             showAddItemDialog()
         }
-
         fabDeleteAll.setOnClickListener {
             plansListAdapter.deleteAll()
         }

@@ -58,7 +58,7 @@ class StravaAuth : AppCompatActivity() {
                     d("error", "output was null, returning home")
                 }
 
-                val internalStorage: File = getFilesDir()
+                val internalStorage: File = filesDir
                 val stravaFile = File(internalStorage, "strava_auth.txt")
                 stravaFile.createNewFile()
                 stravaFile.writeText(output.access_token)
