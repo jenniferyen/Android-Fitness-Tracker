@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity() {
                 when (position) {
                     // select
                     0 -> {
-                        tvStats.text = "No runs yet to display"
+                        tvStats.text = "No runs to display"
                     }
                     // most recent run
                     1 -> {
                         if (runs.size == 0) {
-                            tvStats.text = "No runs yet to display"
+                            tvStats.text = "No runs to display"
                         } else {
                             val dist = "%.2f".format(runs[0].distance * 1.609f)
                             val timeH = "%.2f".format(runs[0].minutes / 60f)
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         val timeH = timeM / 60f
                         val timeHStr = "%.2f".format(timeH)
                         if (dist == 0f) {
-                            tvStats.text = "No runs here to display"
+                            tvStats.text = "No runs to display"
                         } else {
                             val distStr = "%.2f".format(dist * 1.609f)
                             tvStats.text =
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                         val timeH = timeM / 60f
                         val timeHStr = "%.2f".format(timeH)
                         if (dist == 0f) {
-                            tvStats.text = "No runs here to display"
+                            tvStats.text = "No runs to display"
                         } else {
                             val distStr = "%.2f".format(dist * 1.609f)
                             tvStats.text =
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
                         val timeH = timeM / 60f
                         val timeHStr = "%.2f".format(timeH)
                         if (dist == 0f) {
-                            tvStats.text = "No runs here to display"
+                            tvStats.text = "No runs to display"
                         } else {
                             val distStr = "%.2f".format(dist * 1.609f)
                             tvStats.text =
@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
                         val timeH = timeM / 60f
                         val timeHStr = "%.2f".format(timeH)
                         if (dist == 0f) {
-                            tvStats.text = "No runs here to display"
+                            tvStats.text = "No runs to display"
                         } else {
                             val distStr = "%.2f".format(dist * 1.609f)
                             tvStats.text =

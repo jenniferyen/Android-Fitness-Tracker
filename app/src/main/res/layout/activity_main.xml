@@ -72,7 +72,7 @@
         android:id="@+id/tvStats"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_margin="24dp"
+        android:layout_margin="32dp"
         android:text="STATS"
         android:textColor="#000000"
         android:textSize="24sp"
