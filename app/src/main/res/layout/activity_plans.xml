@@ -21,6 +21,15 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
 
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/btnBack"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_margin="16dp"
+                android:text="Back"
+                android:theme="@style/Theme.MaterialComponents" />
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

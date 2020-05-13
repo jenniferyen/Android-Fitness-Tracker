@@ -84,6 +84,7 @@ class PlansListAdapter(
         var distSat = 0f
 
         for (run in runs) {
+            d("processing_run", "distance: ${run.distance}, time: ${run.minutes}")
             val temp = Calendar.getInstance()
             temp.set(run.year, run.month - 1, run.day)
             val runDate = temp.timeInMillis
@@ -182,8 +183,6 @@ class PlansListAdapter(
                         }
                     }
                 }
-            } else {
-                break
             }
         }
     }

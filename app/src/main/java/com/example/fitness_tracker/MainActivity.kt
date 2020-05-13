@@ -62,7 +62,9 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             val dist = "%.2f".format(runs[0].distance * 1.609f)
                             val timeH = "%.2f".format(runs[0].minutes / 60f)
-                            tvStats.text = "Total distance = $dist km\nTotal time = $timeH hours"
+                            val pace = "%d:%02d".format(runs[0].pace_mins, runs[0].pace_secs)
+                            tvStats.text =
+                                "Total distance = $dist km\nTotal time = $timeH hours\nPace = $pace mph"
                         }
                     }
                     // last week

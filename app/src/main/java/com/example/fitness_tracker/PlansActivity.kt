@@ -1,5 +1,6 @@
 package com.example.fitness_tracker
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fitness_tracker.adapter.PlansListAdapter
@@ -30,6 +31,13 @@ class PlansActivity : AppCompatActivity(), ItemDialog.ItemHandler {
         }
         fabDeleteAll.setOnClickListener {
             plansListAdapter.deleteAll()
+        }
+
+        btnBack.setOnClickListener {
+            val intentBack = Intent()
+            intentBack.setClass(this, MainActivity::class.java)
+            startActivity(intentBack)
+            finish()
         }
     }
 

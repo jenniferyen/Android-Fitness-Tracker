@@ -2,11 +2,10 @@
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    card_view:cardBackgroundColor="#00B9A9"
+    card_view:cardBackgroundColor="#FFCC80"
     card_view:cardCornerRadius="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
